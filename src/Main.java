@@ -1,5 +1,15 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        Pichu pichu = new Pichu();
+        System.out.println(pichu.toString());
+        pichu.levelUp();
+        System.out.println(pichu.toString());
+        pichu.levelUp();
+        System.out.println(pichu.toString());
+        pichu.levelUp();
+        System.out.println(pichu.toString());
+        pichu.levelUp();
+
     }
 }

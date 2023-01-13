@@ -46,6 +46,10 @@ public class Attack {
     public void setCost(int cost) {
         this.cost = cost;
     }
+    public String toString(){
+        return getName()+", Damage cost "+getCost()+ ", Min damage is "+getMinDamage()+" ,Max damage is "+getMaxDamage()+".";
+    }
+
 
 
 }
