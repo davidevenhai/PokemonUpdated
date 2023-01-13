@@ -71,7 +71,8 @@ public class Electabuzz extends Pokemon {
             this.setAttackPoints((this.getAttackPoints() - attackChoice.getCost()));
             attack = random.nextInt(attackChoice.getMinDamage(), attackChoice.getMaxDamage());
             if (Objects.equals(this.getType(), "ELECTRIC")) {
-                attack = attack + (attack * (turnCounter / 100));
+                int tempBonus = turnCounter*5;
+                attack = attack + (attack * (tempBonus / 100));
             }
             System.out.print("You dealt damage to an opponent of: " + attack + " point.");
 
