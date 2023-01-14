@@ -27,9 +27,8 @@ public class Main {
         boolean checkTurn1=false;
         boolean checkEndGame=false;
         do {
-
             do {
-                System.out.println("First player, your turn, choose the option you prefer" + "\n" + "1. Making an attack." + "\n" + "2.Waiting." + "\n" + "3.Evolution." + "\n" + "4.Special action.");
+                System.out.println("First player, your turn, choose the option you prefer" + "\n" + "1.Making an attack." + "\n" + "2.Waiting." + "\n" + "3.Evolution." + "\n" + "4.Special action.");
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1 -> {
@@ -53,13 +52,16 @@ public class Main {
                     }
                 }
             } while (!checkTurn1);
-
             pokemomUser1.newTurn();
             checkEndGame = checkWinner(pokemomUser1, pokemomUser2);
+            System.out.println("First player, your Pokemon:");
+            System.out.println( arrayPokemon[pokemon1] +"\n");
+            System.out.println("Second player, your Pokemon:");
+            System.out.println( arrayPokemon[pokemon2]+"\n");
             if (!checkEndGame) {
                 boolean checkTurn2 = false;
                 do {
-                    System.out.println("Second player, your turn, choose the option you prefer" + "\n" + "1. Making an attack." + "\n" + "2.Waiting." + "\n" + "3.Evolution." + "\n" + "4.Special action.");
+                    System.out.println("Second player, your turn, choose the option you prefer" + "\n" + "1.Making an attack." + "\n" + "2.Waiting." + "\n" + "3.Evolution." + "\n" + "4.Special action.");
                     int choice = scanner.nextInt();
                     switch (choice) {
                         case 1 -> {
@@ -82,9 +84,13 @@ public class Main {
                             checkTurn2 = pokemomUser2.specialaction(pokemomUser2);
                         }
                     }
-                    pokemomUser2.newTurn();
                 } while (!checkTurn2);
+                pokemomUser2.newTurn();
                 checkEndGame = checkWinner(pokemomUser1, pokemomUser2);
+                System.out.println("First player, your Pokemon:");
+                System.out.println( arrayPokemon[pokemon1] +"\n");
+                System.out.println("Second player, your Pokemon:");
+                System.out.println( arrayPokemon[pokemon2]+"\n");
             }
 
 
@@ -99,7 +105,7 @@ public class Main {
         } else if( pokemomUser2.getHp()<=0 && pokemomUser1.getHp()>0){
             System.out.println("The winner in battle is First player");
             check=true;
-        }else   if(pokemomUser2.getHp()==0 && pokemomUser1.getHp()==0){
+        }else if(pokemomUser2.getHp()<=0 && pokemomUser1.getHp()<=0){
             System.out.println("The battle ended in a draw");
             check=true;
         }

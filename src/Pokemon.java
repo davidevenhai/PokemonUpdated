@@ -24,8 +24,8 @@ public abstract class Pokemon {
 
     public void newTurn() {
         Random random = new Random();
-        this.hp = random.nextInt(0, 4);
-        this.attackPoints = random.nextInt(0, 4);
+        this.hp += random.nextInt(0, 4);
+        this.attackPoints += random.nextInt(0, 4);
         this.turn++;
     }
 
