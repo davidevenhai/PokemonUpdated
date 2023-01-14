@@ -1,4 +1,4 @@
-public class Blitzle extends Pikachu{
+public class Blitzle extends Pichu {
     public Blitzle(){
         this.setName("Blitzle");
         this.setLevel(1);

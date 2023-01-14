@@ -9,15 +9,15 @@ public class Main {
         Salandit salandit=new Salandit();
         Moltres moltres=new Moltres();
 
-        Pikachu pikachu=new Pikachu();
+        Pichu pikachu=new Pichu();
         Blitzle blitzle=new Blitzle();
         Electabuzz electabuzz=new Electabuzz();
 
         Pokemon [] arrayPokemon={charmander,salandit,moltres,pikachu,blitzle,electabuzz};
         int pokemon1=random.nextInt(0,5);
         int pokemon2=random.nextInt(0,5);
-        Pokemon pokemomUser1=arrayPokemon[pokemon1];
-        Pokemon pokemomUser2=arrayPokemon[pokemon1];
+        Pokemon pokemonUser1=arrayPokemon[pokemon1];
+        Pokemon pokemonUser2=arrayPokemon[pokemon1];
 
         System.out.println("Welcome to the Pokemon game");
         System.out.println("First player, your Pokemon:");
@@ -32,28 +32,28 @@ public class Main {
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1 -> {
-                        int attackPoint = pokemomUser1.attack();
+                        int attackPoint = pokemonUser1.attack();
                         if (attackPoint == -1) {
                             checkTurn1 = false;
                         } else {
-                            pokemomUser2.downHp(attackPoint);
+                            pokemonUser2.downHp(attackPoint);
                             checkTurn1 = true;
                         }
                     }
                     case 2 -> {
-                        pokemomUser1.waiting();
+                        pokemonUser1.waiting();
                         checkTurn1 = true;
                     }
                     case 3 -> {
-                        checkTurn1 = pokemomUser1.levelUp();
+                        checkTurn1 = pokemonUser1.levelUp();
                     }
                     case 4 -> {
-                        checkTurn1 = pokemomUser1.specialaction(pokemomUser2);
+                        checkTurn1 = pokemonUser1.specialAction(pokemonUser2);
                     }
                 }
             } while (!checkTurn1);
-            pokemomUser1.newTurn();
-            checkEndGame = checkWinner(pokemomUser1, pokemomUser2);
+            pokemonUser1.newTurn();
+            checkEndGame = checkWinner(pokemonUser1, pokemonUser2);
             System.out.println("First player, your Pokemon:");
             System.out.println( arrayPokemon[pokemon1] +"\n");
             System.out.println("Second player, your Pokemon:");
@@ -65,28 +65,28 @@ public class Main {
                     int choice = scanner.nextInt();
                     switch (choice) {
                         case 1 -> {
-                            int attackPoint = pokemomUser2.attack();
+                            int attackPoint = pokemonUser2.attack();
                             if (attackPoint == -1) {
                                 checkTurn2 = false;
                             } else {
-                                pokemomUser1.downHp(attackPoint);
+                                pokemonUser1.downHp(attackPoint);
                                 checkTurn2 = true;
                             }
                         }
                         case 2 -> {
-                            pokemomUser2.waiting();
+                            pokemonUser2.waiting();
                             checkTurn2 = true;
                         }
                         case 3 -> {
-                            checkTurn2 = pokemomUser2.levelUp();
+                            checkTurn2 = pokemonUser2.levelUp();
                         }
                         case 4 -> {
-                            checkTurn2 = pokemomUser2.specialaction(pokemomUser2);
+                            checkTurn2 = pokemonUser2.specialAction(pokemonUser2);
                         }
                     }
                 } while (!checkTurn2);
-                pokemomUser2.newTurn();
-                checkEndGame = checkWinner(pokemomUser1, pokemomUser2);
+                pokemonUser2.newTurn();
+                checkEndGame = checkWinner(pokemonUser1, pokemonUser2);
                 System.out.println("First player, your Pokemon:");
                 System.out.println( arrayPokemon[pokemon1] +"\n");
                 System.out.println("Second player, your Pokemon:");

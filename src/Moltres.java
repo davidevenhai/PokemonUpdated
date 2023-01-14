@@ -15,6 +15,8 @@ public class Moltres extends Charmander {
         this.setAttackPoints(45);
         Attack assistingHeater = new Attack("Assisting Heater", 30, 10, 60);
         this.addAttacks(assistingHeater);
+        Attack fireWing = new Attack("Fire Wing", 30, 30,30);
+        this.addAttacks(fireWing);
     }
 
     public boolean levelUp() {

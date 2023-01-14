@@ -20,9 +20,9 @@ public class Attack {
     public int getRandomDamage(){
         Random random=new Random();
         int damage;
-        if(!this.name.equals("kick")) {
+        if(this.minDamage!=this.maxDamage) {
             damage = random.nextInt(this.minDamage, this.maxDamage);
-        }else damage=2;
+        }else damage = this.maxDamage;
         return damage;
     }
     public boolean mateAttack(String nameAttack){

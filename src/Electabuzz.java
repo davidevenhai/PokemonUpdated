@@ -1,9 +1,4 @@
-
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
-
-public class Electabuzz extends Pikachu {
+public class Electabuzz extends Pichu {
     private String[] attacks;
     private final String TYPE = "ELECTRIC";
 
