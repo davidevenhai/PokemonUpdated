@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Attack {
     private String name;
     private int cost;
@@ -14,6 +16,11 @@ public class Attack {
         this.cost = cost;
         this.minDamage = minDamage;
         this.maxDamage= maxDamage;
+    }
+    public int getRandomDamage(){
+        Random random=new Random();
+        int damage=random.nextInt(this.minDamage,this.maxDamage);
+        return damage;
     }
     public boolean mateAttack(String nameAttack){
         return this.name.equals(nameAttack);

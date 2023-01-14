@@ -2,13 +2,17 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Pichu extends Pokemon {
-    private  String[] attacks;
+public class Pikachu extends Pokemon {
+   // private  String[] attacks;
+    private int electric;
+    private int countTurn;
+    private int countSpecialaction;
+    private int countTurnAlaction;
     private final String TYPE = "ELECTRIC";
 
 
-    public Pichu() {
-        this.setName("Pikachu");
+    public Pikachu() {
+        this.setName("Pichu");
         this.setLevel(1);
         this.setMaxHp(40);
         this.setHp(40);
@@ -16,11 +20,13 @@ public class Pichu extends Pokemon {
         this.setAttackPoints(22.5);
         Attack quickAttack = new Attack("Quick Attack", 5, 10, 10);
         this.addAttacks(quickAttack);
+        this.countSpecialaction=0;
     }
+
 
     public boolean levelUp() {
         boolean evolved = false;
-        if (this.getLevel() == 1) {
+        if (this.getLevel() == 1 && this.getAttackPoints()>25 && this.getHp()>20) {
             this.setName("Pikachu");
             this.setLevel(2);
             this.setMaxHp(50);
@@ -30,13 +36,13 @@ public class Pichu extends Pokemon {
             Attack electroBall = new Attack("Electro Ball", 10, 30, 40);
             this.addAttacks(electroBall);
             evolved = true;
-        } else if (this.getLevel() == 2) {
+        } else if (this.getLevel() == 2 && this.getAttackPoints()>40 && this.getHp()>30) {
             this.setName("Raichu");
             this.setLevel(3);
             this.setMaxHp(160);
-            this.setHp((this.getHp() - 20));
+            this.setHp((this.getHp() - 30));
             this.setMaxAttackPoints(80);
-            this.setAttackPoints((getAttackPoints() - 25));
+            this.setAttackPoints((getAttackPoints() - 40));
             Attack electricSurfer = new Attack("Electric Surfer", 60, 20, 120);
             this.addAttacks(electricSurfer);
             evolved = true;
@@ -48,7 +54,7 @@ public class Pichu extends Pokemon {
 
     }
 
-    public int attack(int turnCounter) {
+    public int attack() {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Your attack list:");
@@ -71,13 +77,14 @@ public class Pichu extends Pokemon {
         } while (!checkInput);
         if ((this.getAttackPoints() - attackChoice.getCost()) < 0) {
             System.out.print("You don't have enough points to attack");
-            attack = 0;
+            attack = -1;
         } else {
+            int tempBonus;
             this.setAttackPoints((this.getAttackPoints() - attackChoice.getCost()));
-            attack = random.nextInt(attackChoice.getMinDamage(), attackChoice.getMaxDamage());
-            if (Objects.equals(this.getType(), "ELECTRIC")) {
-                int tempBonus = turnCounter*5;
-                attack = attack + (attack * (tempBonus / 100));
+            attack = attackChoice.getRandomDamage();
+            if (Objects.equals(this.getType(), "ELECTRIC")) {// חושב שמיותר צריך לבדוק
+
+                attack = attack + (attack * (electricPoint() / 100));
             }
             System.out.print("You dealt damage to an opponent of: " + attack + " point.");
 
@@ -86,11 +93,32 @@ public class Pichu extends Pokemon {
 
     }
 
+    private int electricPoint(){
+        int tempBonus;
+        if(this.getHp()<((this.getMaxHp()*20)/100)){ //במידה ונקודות החיים פחות מ 20 אחוז מהמקסימום השמל מתאפס
+            tempBonus = 0;
+            this.countSpecialaction=getTurn();
+        }else  {
+            this.countSpecialaction=getTurn()-this.countSpecialaction;
+            tempBonus = this.countSpecialaction*5;
+        }
 
-    public String toString() {
-
-        return "Name pokemon: " + this.getName() + "\n" +"Hp:" + this.getHp() + "\n" + "Attack points: " + this.getAttackPoints();
+        return tempBonus;
     }
+    public boolean specialaction(Pokemon pokemon){
+        boolean check=false;
+        if(this.countSpecialaction==0) {
+            this.setHp(this.getMaxHp());
+            this.setAttackPoints(this.getMaxAttackPoints());
+            System.out.print("You have filled your pokemon with all the hp and attack points");
+            check=true;
+        }else {
+            System.out.print("You have used this option already");
+            check=false;
+        }
+        return check;
+    }
+
 
     public String getType() {
         return TYPE;

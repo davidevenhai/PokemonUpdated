@@ -19,7 +19,7 @@ public class Charmander extends Pokemon {
 
     public boolean levelUp() {
         boolean evolved = false;
-        if (this.getLevel() == 1) {
+        if (this.getLevel() == 1 && this.getAttackPoints()>25 && this.getHp()>20) {
             this.setName("Charmeleon");
             this.setLevel(2);
             this.setMaxHp(90);
@@ -29,7 +29,7 @@ public class Charmander extends Pokemon {
             Attack flame = new Attack("Flame Tail", 40, 30, 50);
             this.addAttacks(flame);
             evolved = true;
-        } else if (this.getLevel() == 2) {
+        } else if (this.getLevel() == 2 && this.getAttackPoints()>40 && this.getHp()>30) {
             this.setName("Charizard");
             this.setLevel(3);
             this.setMaxHp(130);
@@ -71,10 +71,10 @@ public class Charmander extends Pokemon {
         } while (!checkInput);
         if ((this.getAttackPoints() - attackChoice.getCost()) < 0) {
             System.out.print("You don't have enough points to attack");
-            attack = 0;
+            attack = -1;
         } else {
             this.setAttackPoints((this.getAttackPoints() - attackChoice.getCost()));
-            attack = random.nextInt(attackChoice.getMinDamage(), attackChoice.getMaxDamage());
+            attack = attackChoice.getRandomDamage();
             int selfHarm = DownHpAttack();
             if (selfHarm == 0) {
                 System.out.print("You dealt damage to an opponent of: " + attack + " point." + "\n" + " There was no self-harm");
@@ -95,11 +95,23 @@ public class Charmander extends Pokemon {
         }
         return selfHarm;
     }
+    public boolean specialaction(Pokemon pokemon){
+        Random random=new Random();
+        int randomAttack=random.nextInt(0,this.getAttacks().length);
+        System.out.println("First drawn attack: "+ this.getAttacks()[randomAttack]);
+        int attackPoint1=this.getAttacks()[randomAttack].getRandomDamage();
+        randomAttack=random.nextInt(0,this.getAttacks().length);
+        System.out.println("Second  drawn attack: "+ this.getAttacks()[randomAttack]);
+        int attackPoint2=this.getAttacks()[randomAttack].getRandomDamage();
+        pokemon.downHp(attackPoint1+attackPoint2);
+        this.setAttackPoints(0);
+        this.setHp((getHp()*50)/100);
+        boolean check=true;
 
-    public String toString() {
-
-        return "Name pokemon: " + this.getName() + "\n" +"Hp:" + this.getHp() + "\n" + "Attack points: " + this.getAttackPoints();
+        return check;
     }
+
+
     public String getTYPE(){
         return TYPE;
     }

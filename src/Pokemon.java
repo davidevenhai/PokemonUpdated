@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public abstract class Pokemon {
@@ -7,6 +8,7 @@ public abstract class Pokemon {
     private int maxHp;
     private int maxAttackPoints;
     private double attackPoints;
+    private int turn=0;
 
     private Attack kick = new Attack("kick", 0, 2, 2);
     private Attack[] attacks = {kick};
@@ -24,6 +26,11 @@ public abstract class Pokemon {
         Random random = new Random();
         this.hp = random.nextInt(0, 4);
         this.attackPoints = random.nextInt(0, 4);
+        this.turn++;
+    }
+
+    public int getTurn() {
+        return turn;
     }
 
     public void waiting() {
@@ -47,6 +54,7 @@ public abstract class Pokemon {
         }
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
@@ -60,7 +68,20 @@ public abstract class Pokemon {
     }
 
     public void setAttackPoints(double attackPoints) {
-        attackPoints = attackPoints;
+        this.attackPoints = attackPoints;
+    }
+
+    @Override
+    public String toString() {
+        return "Pokemon " +
+                "name='" + name + '\'' +"\n"+
+                "level=" + level +
+                ", hp=" + hp +
+                ", Max Hp=" + maxHp + "\n"+
+                "Attack Points=" + attackPoints +
+                ", Max Attack Points=" + maxAttackPoints +" \n"+
+                "Attacks=" + Arrays.toString(attacks)
+                ;
     }
 
     public int getLevel() {
@@ -105,4 +126,10 @@ public abstract class Pokemon {
     }
 
 
+    public abstract int attack() ;
+    public abstract boolean levelUp();
+    public void downHp(int numDown){
+        this.hp-=numDown;
+    }
+    public abstract boolean specialaction(Pokemon pokemon);
 }
