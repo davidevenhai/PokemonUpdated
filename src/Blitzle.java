@@ -1,4 +1,4 @@
-public class Blitzle extends Pichu {
+public class Blitzle extends Pokemon {
     public Blitzle(){
         this.setName("Blitzle");
         this.setLevel(1);
@@ -8,6 +8,7 @@ public class Blitzle extends Pichu {
         this.setAttackPoints(26.25);
         Attack flop = new Attack("Flop", 20, 20, 25);
         this.addAttacks(flop);
+        this.type = "ELECTRIC";
     }
 
     public boolean levelUp() {
@@ -21,6 +22,7 @@ public class Blitzle extends Pichu {
             this.setAttackPoints((getAttackPoints() - 25));
             Attack electroBall = new Attack("Zap Kick", 30, 30, 35);
             this.addAttacks(electroBall);
+            this.type = "ELECTRIC";
             evolved = true;
         }
         if (evolved) {

@@ -1,9 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Moltres extends Charmander {
+public class Moltres extends Pokemon {
     //private String[] attacks;
-   // private final String TYPE = "FIRE";
+    //private final String type = "FIRE";
 
 
     public Moltres() {
@@ -17,6 +17,7 @@ public class Moltres extends Charmander {
         this.addAttacks(assistingHeater);
         Attack fireWing = new Attack("Fire Wing", 30, 30,30);
         this.addAttacks(fireWing);
+        this.type = "FIRE";
     }
 
     public boolean levelUp() {

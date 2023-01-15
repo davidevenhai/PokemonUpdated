@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class Salandit extends Charmander{
+public class Salandit extends Pokemon{
     //private String[] attacks;
    // private final String TYPE = "FIRE";
 
@@ -15,6 +15,8 @@ public class Salandit extends Charmander{
         this.setAttackPoints(45);
         Attack liveCoal = new Attack("Live Coal", 10, 0, 25);
         this.addAttacks(liveCoal);
+        this.type = "FIRE";
+
     }
 
     public boolean levelUp() {
@@ -28,6 +30,8 @@ public class Salandit extends Charmander{
             this.setAttackPoints((getAttackPoints() - 25));
             Attack fireClaws = new Attack("Fire Claws", 25, 0, 50);
             this.addAttacks(fireClaws);
+            this.type = "FIRE";
+
             evolved = true;
         }
         if (evolved) {
